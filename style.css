@@ -1,0 +1,169 @@
+/* ===============================
+   ПЕРЕМЕННЫЕ И ФОНЫ
+   =============================== */
+   :root {
+    --gold: linear-gradient(45deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+    --gold-solid: #BF953F;
+    --bg-gradient: radial-gradient(circle at center, #151208 0%, #050505 100%);
+}
+
+/* ===============================
+   БАЗОВЫЕ СТИЛИ
+   =============================== */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg-gradient); color: white; min-height: 100vh; overflow-x: hidden; position: relative; }
+
+/* ===============================
+   АНИМАЦИЯ ПОЯВЛЕНИЯ
+   =============================== */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+.reveal.show { opacity: 1; transform: translateY(0); }
+
+/* ===============================
+   HEADER
+   =============================== */
+header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 15px 8%; background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(15px);
+    position: sticky; top: 0; z-index: 1000;
+    border-bottom: 1px solid rgba(191,149,63,0.1);
+}
+.logo img { height: 40px; }
+.menu-toggle { display: none; font-size: 28px; cursor: pointer; color: white; }
+
+.main-nav { display: flex; gap: 10px; }
+.nav-link {
+    position: relative; padding: 10px 20px;
+    color: #fff; text-decoration: none; text-transform: uppercase;
+    font-size: 0.8rem; letter-spacing: 2px;
+    z-index: 1; transition: 0.4s ease; border-radius: 8px; overflow: hidden;
+}
+.nav-link::before {
+    content: "";
+    position: absolute; top: 50%; left: 50%;
+    width: 0; height: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(191,149,63,0.4) 50%, rgba(0,0,0,0.9) 100%);
+    border: 1px solid rgba(191,149,63,0.3);
+    transform: translate(-50%, -50%);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1; opacity: 0; border-radius: 8px;
+}
+.nav-link:hover::before { width: 100%; height: 100%; opacity: 1; box-shadow: 0 0 15px rgba(191,149,63,0.2); }
+.nav-link::after {
+    content: ""; position: absolute; bottom: 0; left: 50%;
+    width: 0; height: 1px; background: var(--gold);
+    transition: 0.4s; transform: translateX(-50%);
+}
+.nav-link:hover::after { width: 60%; }
+
+.header-icons { display: flex; gap: 15px; }
+.cart-icon, .account-icon {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(191,149,63,0.3);
+    padding: 10px 20px; border-radius: 30px;
+    cursor: pointer; transition: 0.3s;
+}
+.cart-icon:hover, .account-icon:hover { background: var(--gold); color: black; }
+
+/* ===============================
+   HERO
+   =============================== */
+.hero { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 100px 20px; }
+.hero-logo-img { max-width: 450px; width: 100%; filter: drop-shadow(0 0 15px rgba(191,149,63,0.3)); }
+.hero-subtitle { color: #888; text-transform: uppercase; letter-spacing: 5px; margin-top: 15px; }
+
+/* ===============================
+   FEATURES GRID
+   =============================== */
+.features-grid {
+    display: flex; justify-content: center;
+    gap: 30px; flex-wrap: wrap; margin-bottom: 40px;
+}
+.feat-item {
+    flex: 1; min-width: 280px; padding: 30px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 20px; border: 1px solid rgba(191,149,63,0.1);
+    text-align: center; cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.feat-item:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 15px 35px rgba(191,149,63,0.2);
+    border-color: #BF953F;
+}
+.feat-icon { font-size: 2.5rem; margin-bottom: 15px; display: block; }
+
+/* ===============================
+   PRODUCTS GRID
+   =============================== */
+.section-padding { padding: 80px 8%; text-align: center; }
+.section-title {
+    font-size: 2rem; margin-bottom: 40px;
+    background: var(--gold); -webkit-background-clip: text;
+    background-clip: text; -webkit-text-fill-color: transparent;
+    letter-spacing: 8px;
+}
+
+.products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+.card {
+    background: rgba(20,20,20,0.6); padding: 25px; border-radius: 25px; border: 1px solid #222;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; cursor: pointer;
+}
+.card:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 15px 35px rgba(191,149,63,0.2); border-color: var(--gold-solid); }
+
+.img-box { height: 350px; position: relative; overflow: hidden; border-radius: 15px; margin-bottom: 15px; }
+.img-box img { width: 100%; height: 100%; object-fit: contain; transition: 0.5s; }
+.img-back { position: absolute; top: 0; left: 0; opacity: 0; }
+.card:hover .img-back { opacity: 1; }
+.card:hover .img-front { opacity: 0; }
+
+.add-btn, .checkout-btn, .buy-rank-btn, .logout-btn {
+    background: var(--gold); border: none;
+    padding: 15px; border-radius: 12px; cursor: pointer;
+    font-weight: bold; text-transform: uppercase; width: 100%; margin-top: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.add-btn:hover, .checkout-btn:hover, .buy-rank-btn:hover, .logout-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(191,149,63,0.3); }
+
+/* ===============================
+   CONTACTS GRID
+   =============================== */
+.contacts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+.contact-card {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(191,149,63,0.2);
+    padding: 30px; border-radius: 20px; cursor: pointer;
+}
+.contact-card:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 15px 35px rgba(191,149,63,0.2); border-color: #BF953F; }
+.contact-card:hover .gold-text { text-shadow: 0 0 12px rgba(191,149,63,0.5); }
+
+/* ===============================
+   MODALS
+   =============================== */
+.modal {
+    display: none; position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%; background: rgba(0,0,0,0.9);
+    z-index: 2000; justify-content: center; align-items: center;
+}
+.modal-content {
+    background: #111; margin: 0 auto; padding: 40px;
+    max-width: 400px; border-radius: 30px; border: 1px solid var(--gold-solid);
+    position: relative;
+}
+.close { position: absolute; top: 15px; right: 20px; font-size: 25px; cursor: pointer; color: #555; }
+
+/* ===============================
+   АДАПТИВ
+   =============================== */
+@media (max-width: 992px) {
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    .main-nav { display: none; flex-direction: column; background: rgba(0,0,0,0.95); position: absolute; top: 60px; left: 0; width: 100%; padding: 20px 0; }
+    .main-nav.show { display: flex; }
+    .menu-toggle { display: block; }
+}
+@media (max-width: 600px) {
+    .products-grid { grid-template-columns: 1fr; }
+    .hero { padding: 60px 20px; }
+    .section-padding { padding: 60px 5%; }
+}
